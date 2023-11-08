@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://b3t4mfwf53mq6"]
+[gd_scene load_steps=23 format=3 uid="uid://b3t4mfwf53mq6"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_blocks.gd" id="1_wxmj0"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_convex_block.gd" id="2_5cvry"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="3_8c2vh"]
 [ext_resource type="PackedScene" uid="uid://c2s6u04ij3adk" path="res://Player.tscn" id="4_x88s6"]
+[ext_resource type="PackedScene" uid="uid://dcqxwyhl1nqxf" path="res://Scaler.tscn" id="5_gnxin"]
+[ext_resource type="PackedScene" uid="uid://u3uat6vviy23" path="res://enemy.tscn" id="6_ok6hf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c231h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,6 +21,10 @@ tonemap_mode = 2
 ssao_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_crhhh"]
+vertices = PackedVector3Array(-3.5, 8.5, -6.25, -1.5, 8.5, -6.5, -1.75, 8.5, -7.25, -3.5, 8.5, -7.5, -3.5, 8.5, -6.25, -3.5, 8.5, -7.5, -12.5, 8.5, -19.5, -3.5, 8.5, -12.25, -2.25, 8.5, -12.5, -2.25, 8.5, -19.5, -12.5, 8.5, -19.5, -3.5, 8.5, -6.25, -12.5, 8.5, -19.5, -22.5, 8.5, -10, -22.5, 8.5, -0.25, -3.5, 8.5, -0.25, -12.5, 8.5, -19.5, -22.5, 8.5, -19.5, -22.5, 8.5, -10, -3.5, 8.5, -7.5, -3.5, 8.5, -12.25, -12.5, 8.5, -19.5, -1.25, 8.5, -8.75, -0.5, 8.5, -8.75, -0.5, 8.5, -9.75, -1.25, 8.5, -12.25, 2.75, 8.5, -4, 4.5, 8.5, -3.75, 5, 8.5, -4.5, 2.75, 8.5, -9.75, 32.5, 8.5, -11.25, 32.5, 8.5, -19.5, 23.75, 8.5, -19.5, -1.25, 8.5, -12.25, -0.5, 8.5, -9.75, 0.5, 8.75, -9.75, 0.5, 8.75, -9.75, 0.5, 11.5, -4.5, 1.5, 11.5, -4.5, 1.5, 8.75, -9.75, 6.25, 8.5, -19.5, 7, 8.5, -4.5, 7.5, 8.5, -3, 15, 8.5, -19.5, -1.25, 8.5, -12.25, 0.5, 8.75, -9.75, 1.5, 8.75, -9.75, -1.25, 8.5, -12.25, 1.5, 8.75, -9.75, 2.75, 8.5, -9.75, 6.25, 8.5, -19.5, -2.25, 8.5, -19.5, 32.5, 8.5, -3, 32.5, 8.5, -11.25, 23.75, 8.5, -19.5, 15, 8.5, -19.5, 7.5, 8.5, -3, 2.75, 8.5, -9.75, 5, 8.5, -4.5, 7, 8.5, -4.5, 6.25, 8.5, -19.5, -2.25, 8.5, -19.5, -2.25, 8.5, -12.5, -1.25, 8.5, -12.25, 3.5, 8.5, -1, 5, 8.5, -1.5, 4.5, 8.5, -2, -0.5, 8.5, -8.75, -1.25, 8.5, -8.75, -1.75, 8.5, -7.25, -1.5, 8.5, -6.5, -1, 8.5, -2.5, -0.5, 8.5, -1.5, 1, 8.5, -1.5, 2.25, 8.5, -3.25, -0.5, 8.5, -3.5, 4.5, 8.5, -3.75, 2.75, 8.5, -4, 2.25, 8.5, -3.25, -1.5, 8.5, -2.5, -1, 8.5, -2.5, -0.5, 8.5, -3.5, -0.5, 8.5, -8.75, -1.5, 8.5, -6.5, 1.5, 8.5, -1, 3.5, 8.5, -1, 4.5, 8.5, -2, 4.5, 8.5, -3.75, 2.25, 8.5, -3.25, 1, 8.5, -1.5, 3.5, 8.5, 1, 3.5, 8.5, -1, 1.5, 8.5, -1, 1.5, 8.5, 1, 5, 8.5, 1.5, 3.5, 8.5, 1, 1.5, 8.5, 1, 0, 8.5, 1.5, 0, 8.5, 26.5, 5, 8.5, 26.5, 0.75, 8.5, -6.5, 0.75, 8.5, -4.5, 1.5, 8.5, -4.5, 1.5, 8.5, -6.5, 5.5, 9.5, -3.5, 5.5, 9.5, -2.5, 6.5, 9.5, -2.5, 6.5, 9.5, -3.5, 7, 8.5, -1.5, 6, 8.5, -1.5, 6.5, 8.5, -1, 7, 8.5, -1.5, 6.5, 8.5, -1, 6.5, 8.5, 1, 7.5, 8.5, -3, 7, 8.5, -1.5, 6.5, 8.5, 1, 25.5, 8.5, 26.5, 32.5, 8.5, 26.5, 32.5, 8.5, 19, 18.75, 8.5, 26.5, 25.5, 8.5, 26.5, 32.5, 8.5, 19, 18.75, 8.5, 26.5, 32.5, 8.5, 19, 32.5, 8.5, 11.75, 11.75, 8.5, 26.5, 6.5, 8.5, 1, 5, 8.5, 26.5, 11.75, 8.5, 26.5, 32.5, 8.5, 11.75, 32.5, 8.5, 4.25, 7.5, 8.5, -3, 6.5, 8.5, 1, 5, 8.5, 1.5, 5, 8.5, 26.5, 32.5, 8.5, 4.25, 32.5, 8.5, -3, 7.5, 8.5, -3, -2.5, 12.5, -1.5, -2.5, 12.5, -0.5, -1.5, 12.5, -0.5, -1.5, 12.5, -1.5, -2.25, 8.5, -1.25, -2.25, 8.5, -0.75, -1.75, 8.5, -0.75, -1.75, 8.5, -1.25, -0.5, 11.5, -0.5, -0.5, 11.5, 0.5, 0.5, 11.5, 0.5, 0.5, 11.5, -0.5, 4.5, 10.5, -0.5, 4.5, 10.5, 0.5, 5.5, 10.5, 0.5, 5.5, 10.5, -0.5, -1, 8.5, 1.5, -1.5, 8.5, 0.5, -3, 8.5, 0.5, -22.5, 8.5, 19.75, -22.5, 8.5, 26.5, -11.25, 8.5, 26.5, -22.5, 8.5, 13, -22.5, 8.5, 19.75, -11.25, 8.5, 26.5, -3, 8.5, 0.5, -3.5, 8.5, -0.25, -22.5, 8.5, -0.25, -3, 8.5, 0.5, -22.5, 8.5, -0.25, -22.5, 8.5, 6.25, -1, 8.5, 1.5, 0, 8.5, 1.5, -1, 8.5, 1.5, -22.5, 8.5, 6.25, -22.5, 8.5, 13, -11.25, 8.5, 26.5, 0, 8.5, 26.5, -0.25, 8.5, -0.25, -0.25, 8.5, 0.25, 0.25, 8.5, 0.25, 0.25, 8.5, -0.25, 4.75, 8.5, -0.25, 4.75, 8.5, 0.25, 5.25, 8.5, 0.25, 5.25, 8.5, -0.25)
+polygons = [PackedInt32Array(2, 1, 3), PackedInt32Array(3, 1, 0), PackedInt32Array(6, 5, 4), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(11, 15, 12), PackedInt32Array(12, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(32, 31, 30), PackedInt32Array(35, 34, 33), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37), PackedInt32Array(41, 40, 42), PackedInt32Array(42, 40, 43), PackedInt32Array(46, 45, 44), PackedInt32Array(48, 47, 49), PackedInt32Array(49, 47, 51), PackedInt32Array(49, 51, 50), PackedInt32Array(53, 52, 54), PackedInt32Array(54, 52, 55), PackedInt32Array(55, 52, 56), PackedInt32Array(58, 57, 59), PackedInt32Array(59, 57, 60), PackedInt32Array(63, 62, 61), PackedInt32Array(66, 65, 64), PackedInt32Array(68, 67, 69), PackedInt32Array(69, 67, 70), PackedInt32Array(71, 75, 72), PackedInt32Array(72, 75, 73), PackedInt32Array(73, 75, 74), PackedInt32Array(76, 78, 77), PackedInt32Array(80, 79, 81), PackedInt32Array(81, 79, 83), PackedInt32Array(81, 83, 82), PackedInt32Array(89, 88, 84), PackedInt32Array(84, 88, 85), PackedInt32Array(85, 88, 86), PackedInt32Array(86, 88, 87), PackedInt32Array(93, 92, 90), PackedInt32Array(90, 92, 91), PackedInt32Array(95, 94, 96), PackedInt32Array(96, 94, 97), PackedInt32Array(97, 94, 99), PackedInt32Array(97, 99, 98), PackedInt32Array(103, 102, 100), PackedInt32Array(100, 102, 101), PackedInt32Array(107, 106, 104), PackedInt32Array(104, 106, 105), PackedInt32Array(110, 109, 108), PackedInt32Array(113, 112, 111), PackedInt32Array(116, 115, 114), PackedInt32Array(119, 118, 117), PackedInt32Array(122, 121, 120), PackedInt32Array(124, 123, 125), PackedInt32Array(125, 123, 126), PackedInt32Array(132, 131, 127), PackedInt32Array(127, 131, 130), PackedInt32Array(127, 130, 129), PackedInt32Array(127, 129, 128), PackedInt32Array(135, 134, 133), PackedInt32Array(138, 137, 136), PackedInt32Array(142, 141, 139), PackedInt32Array(139, 141, 140), PackedInt32Array(146, 145, 143), PackedInt32Array(143, 145, 144), PackedInt32Array(150, 149, 147), PackedInt32Array(147, 149, 148), PackedInt32Array(154, 153, 151), PackedInt32Array(151, 153, 152), PackedInt32Array(157, 156, 155), PackedInt32Array(160, 159, 158), PackedInt32Array(163, 162, 161), PackedInt32Array(166, 165, 164), PackedInt32Array(167, 170, 168), PackedInt32Array(168, 170, 169), PackedInt32Array(172, 171, 173), PackedInt32Array(173, 171, 174), PackedInt32Array(174, 171, 175), PackedInt32Array(175, 171, 176), PackedInt32Array(180, 179, 177), PackedInt32Array(177, 179, 178), PackedInt32Array(184, 183, 181), PackedInt32Array(181, 183, 182)]
 
 [sub_resource type="Resource" id="Resource_4jpk7"]
 script = ExtResource("3_8c2vh")
@@ -266,59 +272,81 @@ face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
 environment = SubResource("Environment_065mx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 34.1474, 0)
 shadow_enabled = true
-
-[node name="CyclopsBlocks" type="Node3D" parent="."]
-script = ExtResource("1_wxmj0")
-
-[node name="Block_0" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_4jpk7")
-
-[node name="Block_13" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_6ykuh")
-
-[node name="Block_14" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_40ppf")
-
-[node name="Block_15" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_2pv0i")
-
-[node name="Block_16" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_s7r86")
-
-[node name="Block_17" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_3m4ot")
-
-[node name="Block_18" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_dq5hw")
-
-[node name="Block_19" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_ultg6")
-
-[node name="Block_20" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_3on46")
-
-[node name="Block_21" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_4hgmk")
-
-[node name="Block_22" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_h30dx")
-
-[node name="Block_23" type="Node" parent="CyclopsBlocks"]
-script = ExtResource("2_5cvry")
-block_data = SubResource("Resource_2e8sm")
 
 [node name="Player" parent="." instance=ExtResource("4_x88s6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98754, 9.33919, -8.40308)
+
+[node name="Scaler" parent="." node_paths=PackedStringArray("actors") instance=ExtResource("5_gnxin")]
+actors = [NodePath("../Player")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0461569, 0)
+navigation_mesh = SubResource("NavigationMesh_crhhh")
+
+[node name="CyclopsBlocks" type="Node3D" parent="NavigationRegion3D"]
+script = ExtResource("1_wxmj0")
+
+[node name="Block_0" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_4jpk7")
+
+[node name="Block_13" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_6ykuh")
+
+[node name="Block_14" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_40ppf")
+
+[node name="Block_15" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_2pv0i")
+
+[node name="Block_16" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_s7r86")
+
+[node name="Block_17" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_3m4ot")
+
+[node name="Block_18" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_dq5hw")
+
+[node name="Block_19" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_ultg6")
+
+[node name="Block_20" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_3on46")
+
+[node name="Block_21" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_4hgmk")
+
+[node name="Block_22" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_h30dx")
+
+[node name="Block_23" type="Node" parent="NavigationRegion3D/CyclopsBlocks"]
+script = ExtResource("2_5cvry")
+block_data = SubResource("Resource_2e8sm")
+
+[node name="Enemy3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ok6hf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2049, 18.3658, 6)
+player = NodePath("../Player")
+max_dist = 2
+
+[node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ok6hf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 10.0334, 6)
+player = NodePath("../Player")
+max_dist = 2
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ok6hf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9.38765, 3)
+player = NodePath("../Player")
+max_dist = 2

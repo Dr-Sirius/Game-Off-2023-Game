@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
-.vscode/
-Developer Console.sln/
-Developer Console.csproj/
 
+
+.vscode
+*.sln
+*.csproj

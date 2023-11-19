@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcqxwyhl1nqxf"]
+
+[ext_resource type="Script" path="res://scripts/Scaler.gd" id="1_7a5fy"]
+
+[node name="Scaler" type="Node"]
+script = ExtResource("1_7a5fy")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QodotFGDFile" load_steps=5 format=3 uid="uid://b8polo2njf4a8"]
+
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="1_l1orh"]
+[ext_resource type="Resource" uid="uid://c36hv0o6g0udo" path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" id="1_x83k7"]
+[ext_resource type="Resource" uid="uid://mje2l2fpvrku" path="res://definitions/GrandLight.tres" id="2_kotpk"]
+[ext_resource type="Resource" uid="uid://b70dbh5v15xno" path="res://addons/qodot/game_definitions/fgd/solid_classes/trigger_solid_class.tres" id="3_bfeir"]
+
+[resource]
+script = ExtResource("1_l1orh")
+export_file = false
+target_folder = ""
+fgd_name = "MyGame"
+base_fgd_files = Array[Resource]([ExtResource("1_x83k7")])
+entity_definitions = Array[Resource]([ExtResource("2_kotpk"), ExtResource("3_bfeir")])

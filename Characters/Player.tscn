@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2s6u04ij3adk"]
+
+[ext_resource type="Script" path="res://scripts/PMovement.gd" id="1_5ltw6"]
+[ext_resource type="Resource" uid="uid://cwsliw6rkovus" path="res://resources/PStats.tres" id="2_whtrg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3vapn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b2dq5"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "dash_timer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0270362, 1.20895, 0)
+script = ExtResource("1_5ltw6")
+camera = NodePath("Camera")
+p_stats = ExtResource("2_whtrg")
+dash_timer = NodePath("DashTimer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_3vapn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_b2dq5")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.680676, 0)
+
+[node name="DashTimer" type="Timer" parent="."]
+one_shot = true

@@ -5,3 +5,7 @@
 .vscode
 *.sln
 *.csproj
+/Developer Console.csproj
+/Game Off 2023 project.sln
+/Developer Console.sln
+/Game Off 2023 project.csproj

@@ -5,7 +5,9 @@ extends CharacterBody3D
 @export var camera: Camera3D
 @export var p_stats: PlayerStats
 @export var dash_timer: Timer
-
+@export var barrel: MeshInstance3D
+@export var rate_timer: Timer
+@export var djump_timer: Timer
 # Called when the node enters the scene tree for the first time.
 
 var cam_sens: float
@@ -14,7 +16,8 @@ var jump_velocity: float
 var sprint_mult: float
 var air_dash_mult: float
 var mouse_captured = false
-
+var bullet = load("res://assests/Guns/Bullet.tscn")
+var instance
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -66,8 +69,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
 	
-	if Input.is_action_just_pressed("ui_accept") and !is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and !is_on_floor() and djump_timer.is_stopped():
 		velocity.y = jump_velocity
+		djump_timer.start()
 	
 	if Input.is_action_pressed("Sprint") and is_on_floor():
 		speed *= sprint_mult
@@ -95,6 +99,13 @@ func _physics_process(delta):
 		else:
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
+			
+	if Input.is_action_pressed("Shoot") and rate_timer.is_stopped():
+		instance = bullet.instantiate()
+		instance.position = barrel.global_position
+		instance.transform.basis = barrel.global_transform.basis
+		get_parent().add_child(instance)
+		rate_timer.start()
 	
 	move_and_slide()
 	

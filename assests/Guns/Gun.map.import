@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://2wg5wydc4oxj"
+path="res://.godot/imported/Gun.map-96e2309f677bc88e693c5dd44cbd043a.tres"
+
+[deps]
+
+source_file="res://assests/Guns/Gun.map"
+dest_files=["res://.godot/imported/Gun.map-96e2309f677bc88e693c5dd44cbd043a.tres"]
+
+[params]
+

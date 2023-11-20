@@ -8,9 +8,12 @@
 albedo_color = Color(0.968627, 0.678431, 0.909804, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_btvm1"]
+radius = 0.613837
+height = 2.08039
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21859, 0)
+disable_mode = 2
 script = ExtResource("1_yta35")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -18,6 +21,7 @@ mesh = SubResource("CapsuleMesh_qauht")
 surface_material_override/0 = SubResource("StandardMaterial3D_qux4i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0361032, 0)
 shape = SubResource("CapsuleShape3D_btvm1")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -26,6 +30,9 @@ path_height_offset = 0.15
 avoidance_enabled = true
 radius = 0.75
 debug_enabled = true
+
+[node name="HealthBar" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.227, 0)
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

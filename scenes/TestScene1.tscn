@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://b3t4mfwf53mq6"]
+[gd_scene load_steps=102 format=3 uid="uid://b3t4mfwf53mq6"]
 
 [ext_resource type="Script" path="res://scripts/World.gd" id="1_jrl4l"]
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="3_wqyd5"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2s6u04ij3adk" path="res://Characters/Player.tscn" id="4_x88s6"]
 [ext_resource type="Texture2D" uid="uid://2d0qcg6thgsh" path="res://textures/256x256/Terrain/Terrain_22-256x256.png" id="5_5ojar"]
 [ext_resource type="Texture2D" uid="uid://bc0muorebmnfv" path="res://textures/256x256/Stone/Stone_05-256x256.png" id="5_12rrt"]
-[ext_resource type="PackedScene" uid="uid://dcqxwyhl1nqxf" path="res://Scaler.tscn" id="5_gnxin"]
+[ext_resource type="PackedScene" uid="uid://dcqxwyhl1nqxf" path="res://Custom Nodes/Scaler.tscn" id="5_gnxin"]
 [ext_resource type="Texture2D" uid="uid://7c8ecp05dam5" path="res://textures/256x256/Metal/Metal_20-256x256.png" id="6_ucoom"]
 [ext_resource type="Texture2D" uid="uid://bytjcw7ajbj4g" path="res://textures/256x256/Elements/Elements_14-256x256.png" id="7_bkdqy"]
 [ext_resource type="Texture2D" uid="uid://bkg2bhbcjptdd" path="res://textures/256x256/Metal/Metal_19-256x256.png" id="8_v5ipr"]
@@ -407,6 +407,10 @@ points = PackedVector3Array(-0.125, 5.25, -3.75, -0.125, -5.25, -3.75, 0.125, -5
 [sub_resource type="BoxShape3D" id="BoxShape3D_4p71k"]
 size = Vector3(180.022, 14.7895, 111.075)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_354cu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_y6pge"]
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_jrl4l")
 
@@ -418,7 +422,7 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("4_x88s6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.749, 9.33919, -3.23619)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.749, 9.33919, -3.23619)
 
 [node name="Scaler" parent="." node_paths=PackedStringArray("actors") instance=ExtResource("5_gnxin")]
 actors = [NodePath("../Player")]
@@ -693,6 +697,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.8017, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.20112, 0)
 shape = SubResource("BoxShape3D_4p71k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0233, 0)
+shape = SubResource("BoxShape3D_354cu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0233, 0)
+mesh = SubResource("BoxMesh_y6pge")
+skeleton = NodePath("../..")
 
 [connection signal="trigger" from="NavigationRegion3D/QodotMap/entity_3_trigger" to="NavigationRegion3D/QodotMap/entity_2_mover" method="use"]
 [connection signal="trigger" from="NavigationRegion3D/QodotMap/entity_4_trigger" to="NavigationRegion3D/QodotMap/entity_5_mover" method="use"]

@@ -14,6 +14,8 @@ func _process(delta):
 	print(get_child_count() - 6)
 	if Input.is_action_pressed("ui_text_indent"):
 		enemy_spawn(enemy)
+	if Input.is_action_just_pressed("1"):
+		enemy_spawn(enemy)
 		
 func enemy_spawn(enemy):
 	var instance = enemy.instantiate()

@@ -6,8 +6,10 @@ const SPEED = 5.0
 @export var player: CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var health_bar = $HealthBar
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var health = 20
 
 var state = SURROUND
 var random
@@ -21,7 +23,7 @@ func _ready():
 	var rand = RandomNumberGenerator.new()
 	rand.randomize()
 	random = rand.randf()
-	
+	health_bar.text = str(health)
 
 func _physics_process(delta):
 	
@@ -75,7 +77,15 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 
 
 
-
+func hit():
+	print("hit")
+	if health > 0:
+		health -= 1
+		health_bar.text = str(health)
+		if health == 0:
+			queue_free()
+	if health == 0:
+		queue_free()
 
 
 

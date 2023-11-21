@@ -25,7 +25,7 @@ func _ready():
 	random = rand.randf()
 	health_bar.text = str(health)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	match state:
 		SURROUND:
@@ -75,9 +75,14 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 
 
 
+func _on_navigation_agent_3d_navigation_finished():
+	state = ATTACK
 
 
-func hit():
+
+
+
+func _on_hit_box_body_hit():
 	print("hit")
 	if health > 0:
 		health -= 1
@@ -86,8 +91,3 @@ func hit():
 			queue_free()
 	if health == 0:
 		queue_free()
-
-
-
-func _on_navigation_agent_3d_navigation_finished():
-	state = ATTACK

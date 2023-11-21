@@ -5,10 +5,11 @@ extends CharacterBody3D
 @export var camera: Camera3D
 @export var p_stats: PlayerStats
 @export var dash_timer: Timer
-@export var barrel: MeshInstance3D
+@export var barrel: Node3D
 @export var rate_timer: Timer
 @export var djump_timer: Timer
 # Called when the node enters the scene tree for the first time.
+@onready var particles = $Camera/Barrel/GPUParticles3D
 
 var cam_sens: float
 var speed: float
@@ -100,12 +101,20 @@ func _physics_process(delta):
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
 			
-	if Input.is_action_pressed("Shoot") and rate_timer.is_stopped():
-		instance = bullet.instantiate()
-		instance.position = barrel.global_position
-		instance.transform.basis = barrel.global_transform.basis
-		get_parent().add_child(instance)
-		rate_timer.start()
+#	if Input.is_action_pressed("Shoot") and rate_timer.is_stopped():
+#		hitShoot()
+		
+		
 	
 	move_and_slide()
+	
+func shoot():
+	particles.emitting = true
+	instance = bullet.instantiate()
+	instance.position = barrel.global_position
+	instance.transform.basis = barrel.global_transform.basis
+	get_parent().add_child(instance)
+	rate_timer.start()
+
+
 	

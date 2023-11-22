@@ -9,7 +9,7 @@ extends CharacterBody3D
 @export var rate_timer: Timer
 @export var djump_timer: Timer
 # Called when the node enters the scene tree for the first time.
-@onready var particles = $Camera/Barrel/GPUParticles3D
+@export var pui: Control
 
 var cam_sens: float
 var speed: float
@@ -22,9 +22,11 @@ var instance
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
+var health = 50
 
 func _ready():
+	pui.get_children()[1].max_value = health
+	pui.get_children()[1].value = health
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_captured = true
 	ResourceSaver.save(p_stats)
@@ -87,8 +89,8 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		if direction:
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 15.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 15.0)
 		else:
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
@@ -109,7 +111,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func shoot():
-	particles.emitting = true
+	
 	instance = bullet.instantiate()
 	instance.position = barrel.global_position
 	instance.transform.basis = barrel.global_transform.basis
@@ -118,3 +120,10 @@ func shoot():
 
 
 	
+
+
+func _on_player_hit_box_body_hit(dam):
+	print("Player health")
+	health -= dam
+	pui.get_children()[1].value = health
+	print(health)

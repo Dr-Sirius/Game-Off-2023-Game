@@ -1,15 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2s6u04ij3adk"]
+[gd_scene load_steps=9 format=3 uid="uid://c2s6u04ij3adk"]
 
 [ext_resource type="Script" path="res://scripts/PMovement.gd" id="1_5ltw6"]
-[ext_resource type="Resource" uid="uid://rv5oj3b05dgj" path="res://resources/PStats.tres" id="2_whtrg"]
+[ext_resource type="Resource" uid="uid://byaduryl658ud" path="res://resources/PStats.tres" id="2_whtrg"]
 [ext_resource type="PackedScene" uid="uid://xoc710a2kcaw" path="res://scenes/PlayerUi.tscn" id="3_ggt2k"]
 [ext_resource type="PackedScene" uid="uid://espnisso6fs1" path="res://assests/Guns/HitScanGun.tscn" id="4_3g2fp"]
+[ext_resource type="Script" path="res://Characters/Enemies/HitBox.gd" id="5_0slfk"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3vapn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b2dq5"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "dash_timer", "barrel", "rate_timer", "djump_timer")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2gma1"]
+radius = 0.568925
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "dash_timer", "barrel", "rate_timer", "djump_timer", "pui")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00270212, 1.21286, -0.00402045)
 script = ExtResource("1_5ltw6")
 camera = NodePath("Camera")
@@ -18,18 +22,19 @@ dash_timer = NodePath("DashTimer")
 barrel = NodePath("Camera/HitScanGun")
 rate_timer = NodePath("Rate")
 djump_timer = NodePath("DJumpTimer")
+pui = NodePath("PlayerUi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_3vapn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_b2dq5")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.680676, 0)
 
 [node name="HitScanGun" parent="Camera" instance=ExtResource("4_3g2fp")]
-transform = Transform3D(0.999048, 0, 0.0436194, 0, 1, 0, -0.0436194, 0, 0.999048, 0.1, -0.196, -0.5)
+transform = Transform3D(0.999048, 0, 0.0436194, 0, 1, 0, -0.0436194, 0, 0.999048, 0.0762833, -0.196, -1.0432)
 
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
@@ -43,4 +48,13 @@ one_shot = true
 
 [node name="PlayerUi" parent="." instance=ExtResource("3_ggt2k")]
 
+[node name="PlayerHitBox" type="Area3D" parent="." groups=["player"]]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("5_0slfk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitBox"]
+shape = SubResource("CylinderShape3D_2gma1")
+
 [connection signal="shot" from="Camera/HitScanGun" to="PlayerUi" method="_on_hit_scan_gun_shot"]
+[connection signal="body_hit" from="PlayerHitBox" to="." method="_on_player_hit_box_body_hit"]

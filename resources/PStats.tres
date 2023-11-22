@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://rv5oj3b05dgj"]
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://scripts/PStats.gd" id="1_dwa7l"]
 
 [resource]
 script = ExtResource("1_dwa7l")
-MoveSpeed = 5.0
+MoveSpeed = 2.5
 JumpVelocity = 4.5
 CameraSens = 0.004
 SprintMultiplier = 2.0

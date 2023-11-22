@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://bi30qbqjvxg0p"
+path="res://.godot/imported/Lvl1.map-04856b054341ab90c500066d73e338fb.tres"
+
+[deps]
+
+source_file="res://scenes/Lvl1.map"
+dest_files=["res://.godot/imported/Lvl1.map-04856b054341ab90c500066d73e338fb.tres"]
+
+[params]
+

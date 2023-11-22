@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://u3uat6vviy23"]
+[gd_scene load_steps=8 format=3 uid="uid://u3uat6vviy23"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_yta35"]
 [ext_resource type="Script" path="res://Characters/Enemies/HitBox.gd" id="2_gov57"]
+[ext_resource type="PackedScene" uid="uid://deaejjxbtl7lq" path="res://Characters/Enemies/EnemyGun.tscn" id="3_0sm67"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qauht"]
 
@@ -37,7 +38,6 @@ debug_enabled = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.227, 0)
 
 [node name="HitBox" type="Area3D" parent="." groups=["enemies"]]
-disable_mode = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_gov57")
@@ -45,6 +45,19 @@ script = ExtResource("2_gov57")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0361032, 0)
 shape = SubResource("CylinderShape3D_x1pw5")
+
+[node name="attack" type="Timer" parent="."]
+one_shot = true
+
+[node name="EnemyGun" parent="." instance=ExtResource("3_0sm67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.200107, -0.000504851, -0.938518)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.579051, -0.720063)
+target_position = Vector3(0, 0, -100)
+collide_with_areas = true
+
+[node name="search" type="Timer" parent="."]
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

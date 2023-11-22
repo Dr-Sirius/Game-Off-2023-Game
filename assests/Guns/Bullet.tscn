@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://yn400ram7bxt"]
+[gd_scene load_steps=7 format=3 uid="uid://yn400ram7bxt"]
 
 [ext_resource type="Script" path="res://scripts/Bullet.gd" id="1_lc6tw"]
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_774mk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_30ysm"]
+size = Vector3(0.0581803, 0.0774837, 0.868134)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p5hl6"]
 direction = Vector3(0, 0, -1)
@@ -30,11 +33,14 @@ script = ExtResource("1_lc6tw")
 transform = Transform3D(0.2, 0, 0, 0, -5.24537e-08, -0.27, 0, 1.2, -1.18021e-08, 0, 0, 0)
 mesh = SubResource("TubeTrailMesh_774mk")
 
-[node name="BulletRay" type="RayCast3D" parent="."]
+[node name="BulletRay" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-target_position = Vector3(0, 0, -1)
+collision_layer = 2
 collision_mask = 2
-collide_with_areas = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletRay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61429e-05, -5.96046e-08, -0.101518)
+shape = SubResource("BoxShape3D_30ysm")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.009)
@@ -48,4 +54,6 @@ draw_pass_1 = SubResource("BoxMesh_ls2fi")
 wait_time = 10.0
 autostart = true
 
+[connection signal="area_entered" from="BulletRay" to="." method="_on_bullet_ray_area_entered"]
+[connection signal="body_entered" from="BulletRay" to="." method="_on_bullet_ray_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
